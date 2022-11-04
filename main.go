@@ -14,6 +14,7 @@ import (
 )
 
 type NFT struct {
+	TeamName         string      `json:"team_name"`
 	Format           string      `json:"format"`
 	Name             string      `json:"name"`
 	Description      string      `json:"description"`
@@ -75,9 +76,9 @@ func GenerateCSV(team []NFT) {
 	csvWriter := csv.NewWriter(file)
 	defer csvWriter.Flush()
 	var data [][]string
-	data = append(data, []string{"Teams Names", "Series Number", "Filename", "Description", "Gender", "Attribute", "UUID", "Hash"})
+	data = append(data, []string{"Teams Names", "Series Number", "Filename", "Name", "Description", "Gender", "Attribute", "UUID", "Hash"})
 	for i, v := range team {
-		row := []string{v.Name, v.SeriesNumber, v.Collection.Name, v.Description, v.Gender, fmt.Sprintf("%v", collection[i]), v.Uuid, v.Hash}
+		row := []string{v.TeamName, v.SeriesNumber, v.Collection.Name, v.Name, v.Description, v.Gender, fmt.Sprintf("%v", collection[i]), v.Uuid, v.Hash}
 		data = append(data, row)
 
 	}
@@ -109,8 +110,9 @@ func GenerateJSON(data [][]string) []NFT {
 		}
 		collection = append(collection, t[6])
 		nft := NFT{
+			TeamName:         t[0],
 			Format:           "CHIP-0007",
-			Name:             t[0],
+			Name:             t[3],
 			Description:      t[4],
 			MintingTool:      "SuperMinter/2.5.2",
 			SensitiveContent: false,
