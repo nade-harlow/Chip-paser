@@ -1,6 +1,5 @@
 # **CHIP Parser**
-This is a simple CLI app that takes in a .csv file and returns a JSON and a .csv file as outputs.
-
+A simple CLI tool to generate CHIP-0007 compatible json files from CSV files.
 # Getting Started
 
 * [Install Go](https://golang.org/doc/install)
