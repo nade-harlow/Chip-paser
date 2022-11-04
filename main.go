@@ -75,9 +75,9 @@ func GenerateCSV(team []NFT) {
 	csvWriter := csv.NewWriter(file)
 	defer csvWriter.Flush()
 	var data [][]string
-	data = append(data, []string{"Series Number", "Filename", "Description", "Gender", "Attribute", "UUID", "Hash"})
+	data = append(data, []string{"Teams Names", "Series Number", "Filename", "Description", "Gender", "Attribute", "UUID", "Hash"})
 	for i, v := range team {
-		row := []string{v.SeriesNumber, v.Collection.Name, v.Description, v.Gender, fmt.Sprintf("%v", collection[i]), v.Uuid, v.Hash}
+		row := []string{v.Name, v.SeriesNumber, v.Collection.Name, v.Description, v.Gender, fmt.Sprintf("%v", collection[i]), v.Uuid, v.Hash}
 		data = append(data, row)
 
 	}
@@ -110,7 +110,7 @@ func GenerateJSON(data [][]string) []NFT {
 		collection = append(collection, t[6])
 		nft := NFT{
 			Format:           "CHIP-0007",
-			Name:             t[3],
+			Name:             t[0],
 			Description:      t[4],
 			MintingTool:      "SuperMinter/2.5.2",
 			SensitiveContent: false,
